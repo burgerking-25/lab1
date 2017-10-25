@@ -1,0 +1,19 @@
+
+
+
+
+; *******************************************************************
+swptsk	macro
+	bsf	INTCON, TMR0IF, A	; Force an interrupt
+	endm	
+; *******************************************************************
+
+
+; *******************************************************************
+retfint	macro
+	movff	ALT_STATUS, STATUS	; Return STATUS		
+	movff	ALT_W0, WREG		; Return WREG
+	bsf	T0CON, TMR0ON, A	; Start the timer
+	retfie
+	endm
+; *******************************************************************
